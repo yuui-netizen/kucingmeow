@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bakery Kucing Meow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F7F0E1;
+    --cream-soft:#FBF7EE;
+    --brown:#4A2E22;
+    --brown-soft:#7A5A47;
+    --caramel:#C98A4B;
+    --blush:#F3C9B0;
+    --charcoal:#2B2320;
+    --line: rgba(74,46,34,0.12);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--brown);
+    font-family:'Nunito Sans', sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3, .display{
+    font-family:'Fredoka', sans-serif;
+    color:var(--brown);
+  }
+  a{ text-decoration:none; color:inherit; }
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 32px; }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(247,240,225,0.9);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 32px; max-width:1080px; margin:0 auto;
+  }
+  .logo{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Fredoka', sans-serif; font-weight:600; font-size:1.15rem;
+  }
+  .logo .paw{ width:26px; height:26px; }
+  .nav-links{ display:flex; gap:32px; font-weight:600; font-size:0.95rem; }
+  .nav-links a{ opacity:0.75; transition:opacity .2s; }
+  .nav-links a:hover{ opacity:1; }
+  .nav-cta{
+    background:var(--caramel); color:var(--cream-soft);
+    padding:10px 20px; border-radius:100px; font-weight:700; font-size:0.9rem;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .nav-cta:hover{ transform:translateY(-2px); box-shadow:0 8px 18px rgba(201,138,75,.35);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    padding:100px 32px 160px;
+    text-align:center;
+    overflow:hidden;
+  }
+  .badge{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--blush); color:var(--brown);
+    padding:8px 18px; border-radius:100px;
+    font-weight:700; font-size:0.8rem; letter-spacing:.04em;
+    margin-bottom:28px;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 7vw, 4.6rem);
+    font-weight:700;
+    line-height:1.05;
+    letter-spacing:-0.01em;
+  }
+  .hero h1 span{ color:var(--caramel); }
+  .hero p{
+    max-width:520px; margin:22px auto 0;
+    color:var(--brown-soft); font-size:1.05rem;
+  }
+  .hero-ctas{ display:flex; gap:14px; justify-content:center; margin-top:38px; flex-wrap:wrap; }
+  .btn-primary{
+    background:var(--brown); color:var(--cream-soft);
+    padding:15px 30px; border-radius:100px; font-weight:700;
+    transition:transform .2s ease;
+  }
+  .btn-primary:hover{ transform:translateY(-2px); }
+  .btn-ghost{
+    border:2px solid var(--brown); color:var(--brown);
+    padding:13px 28px; border-radius:100px; font-weight:700;
+    transition:background .2s ease;
+  }
+  .btn-ghost:hover{ background:var(--brown); color:var(--cream-soft); }
+
+  /* paw trail svg spanning hero -> menu */
+  .paw-trail{
+    position:absolute; left:50%; transform:translateX(-50%);
+    top:20px; width:120px; height:auto; opacity:0.5;
+    pointer-events:none;
+  }
+
+  /* ---------- Menu ---------- */
+  .section-label{
+    text-transform:uppercase; letter-spacing:.14em; font-size:0.78rem;
+    font-weight:700; color:var(--caramel); margin-bottom:10px; display:block;
+  }
+  .menu{
+    padding:20px 32px 100px;
+  }
+  .menu-head{ text-align:center; margin-bottom:56px; }
+  .menu-head h2{ font-size:clamp(1.8rem,4vw,2.6rem); }
+
+  .menu-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:28px;
+  }
+  .card{
+    background:var(--cream-soft);
+    border:1px solid var(--line);
+    border-radius:28px;
+    padding:38px 32px;
+    position:relative;
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .card:hover{ transform:translateY(-6px); box-shadow:0 20px 40px rgba(74,46,34,0.1); }
+  .card-icon{
+    width:64px; height:64px; border-radius:20px;
+    background:var(--blush);
+    display:flex; align-items:center; justify-content:center;
+    font-size:30px; margin-bottom:22px;
+  }
+  .card h3{ font-size:1.4rem; margin-bottom:6px; }
+  .card .desc{ color:var(--brown-soft); font-size:0.92rem; margin-bottom:22px; }
+  .card-foot{
+    display:flex; align-items:center; justify-content:space-between;
+    border-top:1px solid var(--line); padding-top:18px;
+  }
+  .price{ font-family:'Fredoka', sans-serif; font-weight:600; font-size:1.3rem; color:var(--brown); }
+  .order-link{
+    font-weight:700; font-size:0.88rem; color:var(--caramel);
+    display:flex; align-items:center; gap:4px;
+  }
+
+  /* ---------- Promo ---------- */
+  .promo{
+    margin:0 32px 100px;
+    max-width:1016px; margin-left:auto; margin-right:auto;
+    background:var(--brown);
+    color:var(--cream-soft);
+    border-radius:32px;
+    padding:56px 40px;
+    display:flex; align-items:center; justify-content:space-between; gap:32px;
+    flex-wrap:wrap;
+    position:relative;
+    overflow:hidden;
+  }
+  .promo::after{
+    content:"🐾"; position:absolute; right:-10px; bottom:-30px;
+    font-size:180px; opacity:0.06; transform:rotate(-15deg);
+  }
+  .promo-text h2{ color:var(--cream-soft); font-size:clamp(1.6rem,3.6vw,2.2rem); margin-bottom:8px; }
+  .promo-text p{ color:#e7d9c9; max-width:380px; }
+  .promo-badge{
+    background:var(--caramel); color:var(--brown);
+    font-family:'Fredoka', sans-serif; font-weight:700;
+    font-size:2.4rem; border-radius:50%;
+    width:130px; height:130px;
+    display:flex; align-items:center; justify-content:center;
+    text-align:center; line-height:1.1; flex-shrink:0;
+    box-shadow:0 0 0 8px rgba(201,138,75,0.18);
+  }
+  .promo-badge small{ display:block; font-size:0.85rem; font-weight:700; }
+
+  /* ---------- About / Halal ---------- */
+  .strip{
+    display:flex; align-items:center; justify-content:center; gap:12px;
+    padding:0 32px 100px; flex-wrap:wrap; text-align:center;
+  }
+  .strip .pill{
+    display:flex; align-items:center; gap:8px;
+    border:1px solid var(--line); padding:12px 22px; border-radius:100px;
+    font-weight:700; font-size:0.9rem; color:var(--brown-soft);
+    background:var(--cream-soft);
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    background:var(--charcoal); color:#E7DAC9;
+    padding:56px 32px 32px;
+  }
+  .foot-grid{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:32px;
+    max-width:1080px; margin:0 auto 32px;
+  }
+  .foot-brand{ font-family:'Fredoka', sans-serif; font-size:1.3rem; font-weight:600; color:var(--cream-soft); margin-bottom:10px;}
+  .foot-brand-desc{ max-width:280px; font-size:0.9rem; opacity:0.7; }
+  .foot-col h4{ font-size:0.85rem; text-transform:uppercase; letter-spacing:.08em; margin-bottom:14px; opacity:0.6; }
+  .foot-col a, .foot-col p{ display:block; font-size:0.92rem; opacity:0.85; margin-bottom:8px; }
+  .foot-bottom{
+    max-width:1080px; margin:0 auto; padding-top:24px; border-top:1px solid rgba(255,255,255,0.08);
+    font-size:0.8rem; opacity:0.5; text-align:center;
+  }
+
+  @media (max-width:720px){
+    .nav-links{ display:none; }
+    .menu-grid{ grid-template-columns:1fr; }
+    .promo{ flex-direction:column; text-align:center; }
+    .foot-grid{ flex-direction:column; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .card, .btn-primary, .nav-cta{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">
+      <svg class="paw" viewBox="0 0 100 100" fill="none">
+        <circle cx="50" cy="62" r="20" fill="#4A2E22"/>
+        <circle cx="24" cy="38" r="10" fill="#4A2E22"/>
+        <circle cx="50" cy="26" r="10" fill="#4A2E22"/>
+        <circle cx="76" cy="38" r="10" fill="#4A2E22"/>
+        <circle cx="35" cy="50" r="8" fill="#4A2E22" opacity="0"/>
+      </svg>
+      Bakery Kucing Meow
+    </div>
+    <nav class="nav-links">
+      <a href="#menu">Menu</a>
+      <a href="#promo">Promo</a>
+      <a href="#tentang">Tentang</a>
+    </nav>
+    <a class="nav-cta" href="#promo">Pesan Sekarang</a>
+  </div>
+</header>
+
+<section class="hero">
+  <svg class="paw-trail" viewBox="0 0 100 220" fill="#4A2E22">
+    <circle cx="50" cy="10" r="6"/><circle cx="42" cy="20" r="3.5"/><circle cx="58" cy="20" r="3.5"/>
+    <circle cx="46" cy="45" r="6"/><circle cx="38" cy="55" r="3.5"/><circle cx="54" cy="55" r="3.5"/>
+    <circle cx="52" cy="82" r="6"/><circle cx="44" cy="92" r="3.5"/><circle cx="60" cy="92" r="3.5"/>
+    <circle cx="48" cy="120" r="6"/><circle cx="40" cy="130" r="3.5"/><circle cx="56" cy="130" r="3.5"/>
+  </svg>
+  <span class="badge">🐾 Halal Indonesia · Bakery Rumahan</span>
+  <h1>Roti dan cupcake<br>rasa <span>kasih sayang</span> kucing.</h1>
+  <p>Dipanggang segar setiap hari dengan resep rumahan sederhana — untuk yang sayang kucing dan sayang perut.</p>
+  <div class="hero-ctas">
+    <a class="btn-primary" href="#menu">Lihat Menu</a>
+    <a class="btn-ghost" href="#promo">Diskon 20%</a>
+  </div>
+</section>
+
+<section class="menu" id="menu">
+  <div class="wrap">
+    <div class="menu-head">
+      <span class="section-label">Menu Favorit</span>
+      <h2>Dua andalan yang selalu ludes</h2>
+    </div>
+    <div class="menu-grid">
+
+      <div class="card">
+        <div class="card-icon"><img src="asset/rotikucing.jpg" alt="Roti Kucing" style="width:100%;height:100%;object-fit:cover;border-radius:20px;"></div>
+        <h3>Roti Kucing</h3>
+        <p class="desc">Roti tawar lembut, tekstur empuk berlapis, cocok untuk sarapan atau bekal.</p>
+        <div class="card-foot">
+          <span class="price">Rp 15.000</span>
+          <a class="order-link" href="#promo">Pesan →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon"><img src="asset/Uni!xDDD X_unicouniuni3.jpg" alt="Cupcake Kucing" style="width:100%;height:100%;object-fit:cover;border-radius:20px;"></div>
+        <h3>Cupcake Kucing</h3>
+        <p class="desc">Cupcake mungil dengan topping krim lembut, manisnya pas untuk teman ngeteh.</p>
+        <div class="card-foot">
+          <span class="price">Rp 18.000</span>
+          <a class="order-link" href="#promo">Pesan →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="promo" id="promo">
+  <div class="promo-text">
+    <h2>Bakery Kucing Meow lagi diskon</h2>
+    <p>Berlaku untuk semua menu, hari ini saja. Kabari teman se-cat-lover kamu sebelum kehabisan.</p>
+  </div>
+  <div class="promo-badge">20%<small>OFF</small></div>
+</section>
+
+<section class="strip" id="tentang">
+  <div class="pill">✅ Bersertifikat Halal</div>
+  <div class="pill">🥐 Dipanggang Segar Setiap Hari</div>
+  <div class="pill">🐱 Dibuat dengan Cinta Kucing</div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="foot-brand">Bakery Kucing Meow</div>
+      <p class="foot-brand-desc">Roti dan cupcake rumahan bertema kucing, dipanggang segar setiap hari.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Menu</h4>
+      <a href="#menu">Roti Kucing — 15K</a>
+      <a href="#menu">Cupcake Kucing — 18K</a>
+    </div>
+    <div class="foot-col">
+      <h4>Pesan</h4>
+      <p>Chat WhatsApp kami</p>
+      <p>Buka setiap hari, 07.00–18.00</p>
+    </div>
+  </div>
+  <div class="foot-bottom">© 2026 Bakery Kucing Meow. Dibuat oleh balbale 🐾.</div>
+</footer>
+
+</body>
+</html>
